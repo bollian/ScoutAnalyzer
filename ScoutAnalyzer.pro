@@ -13,8 +13,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    entry.cpp \
+    matchnumber.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    entry.h \
+    matchnumber.h
 
 FORMS    += mainwindow.ui
