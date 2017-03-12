@@ -1,5 +1,5 @@
-#include <QTextStream>
-#include "parseexception.h"
+#include <qtextstream.h>
+#include <parseexception.h>
 
 ParseException::ParseException(const QString& context, int location, const QString& message) :
 	_context(context),

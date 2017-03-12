@@ -1,8 +1,8 @@
-#include <QIODevice>
 #include <csvfile.h>
-#include <parseexception.h>
 #include <cstdlib>
 #include <strings.h>
+#include <qiodevice.h>
+#include <parseexception.h>
 
 CSVFile::CSVFile(const QString& path) : QFile(path) {}
 

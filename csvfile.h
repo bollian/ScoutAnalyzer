@@ -1,10 +1,9 @@
 #ifndef CSVFILE_H
 #define CSVFILE_H
 
-#include <QList>
-#include <QString>
-#include <QFile>
-#include <row.h>
+#include <qlist.h>
+#include <qstring.h>
+#include <qfile.h>
 
 /**
  * @brief The CSVFile class.  Opens and interprets a Comma Separated Values file following the rules set out in RFC4180.

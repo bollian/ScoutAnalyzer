@@ -1,4 +1,4 @@
-#include "entry.h"
+#include <entry.h>
 
 Entry::Entry() :
 	match_number(0)

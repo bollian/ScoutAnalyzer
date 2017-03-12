@@ -1,11 +1,10 @@
 #ifndef ROW_H
 #define ROW_H
 
-#include <QList>
-#include <QMap>
+#include <qlist.h>
+#include <qmap.h>
 
-class Row
-{
+class Row {
 public:
 	Row(const QList<QString>& cols, const QList<QString>& row);
 

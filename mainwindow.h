@@ -1,9 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QFileDialog>
-#include <QList>
-#include <QMainWindow>
+#include <qfiledialog.h>
+#include <qfile.h>
+#include <qmainwindow.h>
 #include <csvfile.h>
 #include <row.h>
 
@@ -11,16 +11,15 @@ namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+	explicit MainWindow(QWidget* parent = 0);
     ~MainWindow();
 
 private:
-    Ui::MainWindow *ui;
+	Ui::MainWindow* ui;
 
 	QFileDialog fdialog;
 	CSVFile* csv;

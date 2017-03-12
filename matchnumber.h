@@ -1,10 +1,9 @@
 #ifndef MATCHNUMBER_H
 #define MATCHNUMBER_H
 
-#include <QString>
+#include <qstring.h>
 
-class MatchNumber
-{
+class MatchNumber {
 public:
 	enum MatchType {
 		PRACTICE,
@@ -14,7 +13,7 @@ public:
 		FINAL
 	};
 
-	MatchNumber(QString text);
+	MatchNumber(const QString& text);
 	MatchNumber(int num);
 
 	/**

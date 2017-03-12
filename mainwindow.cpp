@@ -1,19 +1,18 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include <parseexception.h>
-#include <QLabel>
 #include <iostream>
 #include <exception>
+#include <qlabel.h>
+#include <mainwindow.h>
+#include <parseexception.h>
+#include <ui_mainwindow.h>
 
 using namespace std;
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(QWidget* parent) :
     QMainWindow(parent),
 	ui(new Ui::MainWindow),
 	fdialog(),
 	csv(NULL),
-	rows()
-{
+	rows() {
 	ui->setupUi(this);
 
 	fdialog.setFilter(QDir::AllDirs | QDir::Files | QDir::NoDot | QDir::NoDotDot);
@@ -23,8 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->open_file_button, &QPushButton::pressed, this, &MainWindow::openFilePressed);
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
 	if (csv != NULL) {
 		csv->close();
@@ -46,8 +44,7 @@ void MainWindow::fileSelected(int status) {
 			csv = new CSVFile(info.filePath());
 			if (!csv->open()) {
 				showMessage("Failed to open file.  Please try again.");
-			}
-			else {
+			} else {
 				showMessage("opened file");
 			}
 

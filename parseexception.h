@@ -2,11 +2,10 @@
 #define PARSEEXCEPTION_H
 
 #include <exception>
-#include <QException>
-#include <QByteArray>
+#include <qexception.h>
+#include <qbytearray.h>
 
-class ParseException : public QException
-{
+class ParseException : public QException {
 public:
 	ParseException(const QString& context, int location, const QString& message);
 	virtual ~ParseException() throw();

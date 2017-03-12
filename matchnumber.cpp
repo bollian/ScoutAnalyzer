@@ -1,7 +1,7 @@
 #include <exception>
-#include "matchnumber.h"
+#include <matchnumber.h>
 
-MatchNumber::MatchNumber(QString text) {
+MatchNumber::MatchNumber(const QString& text) {
 	int parse_start = 1;
 	if (text.startsWith("P")) {
 		type = MatchNumber::PRACTICE;

@@ -1,7 +1,7 @@
 #ifndef ENTRY_H
 #define ENTRY_H
 
-#include <QString>
+#include <qstring.h>
 #include <matchnumber.h>
 
 class Entry

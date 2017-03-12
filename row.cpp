@@ -1,4 +1,4 @@
-#include "row.h"
+#include <row.h>
 
 Row::Row(const QList<QString>& columns, const QList<QString>& row) :
 	values() {
@@ -11,7 +11,7 @@ Row::Row(const QList<QString>& columns, const QList<QString>& row) :
 	}
 }
 
-QString Row::getColumn(const QString &col, bool *ok) {
+QString Row::getColumn(const QString& col, bool* ok) {
 	if (ok != NULL) {
 		*ok = values.contains(col);
 		if (!*ok) {
