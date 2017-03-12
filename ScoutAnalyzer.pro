@@ -16,11 +16,15 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     entry.cpp \
     matchnumber.cpp \
-    row.cpp
+    row.cpp \
+    csvfile.cpp \
+    parseexception.cpp
 
 HEADERS  += mainwindow.h \
     entry.h \
     matchnumber.h \
-    row.h
+    row.h \
+    csvfile.h \
+    parseexception.h
 
 FORMS    += mainwindow.ui
