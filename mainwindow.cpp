@@ -1,6 +1,7 @@
 #include <iostream>
 #include <exception>
 #include <qlabel.h>
+#include <qhash.h>
 #include <mainwindow.h>
 #include <parseexception.h>
 #include <ui_mainwindow.h>
@@ -12,7 +13,7 @@ MainWindow::MainWindow(QWidget* parent) :
 	ui(new Ui::MainWindow),
 	fdialog(),
 	csv(NULL),
-	rows() {
+	entries() {
 	ui->setupUi(this);
 
 	fdialog.setFilter(QDir::AllDirs | QDir::Files | QDir::NoDot | QDir::NoDotDot);
@@ -28,8 +29,8 @@ MainWindow::~MainWindow() {
 		csv->close();
 		delete csv;
 	}
-	for (int i = 0; i < rows.length(); ++i) {
-		delete rows[i];
+	for (int i = 0; i < entries.length(); ++i) {
+		delete entries[i];
 	}
 }
 
@@ -48,16 +49,19 @@ void MainWindow::fileSelected(int status) {
 				showMessage("opened file");
 			}
 
-			QList<QString> header;
+			QHash<QString, int> header_index;
 			QList<QString> row;
 			bool more = false;
 			try {
-				more = csv->readRow(header);
+				more = csv->readRow(row);
+				for (int i = 0; i < row.length(); ++i) {
+					header_index.insert(row[i], i);
+				}
 
 				while (more) {
 					row.clear();
 					more = csv->readRow(row);
-					rows.append(new Row(header, row));
+					entries.append(new Entry(header_index, row));
 				}
 			} catch (ParseException& e) {
 				showMessage("There was an issue with the CSV file (" + e.message() + "): " + e.context());

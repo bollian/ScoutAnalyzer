@@ -5,7 +5,7 @@
 #include <qfile.h>
 #include <qmainwindow.h>
 #include <csvfile.h>
-#include <row.h>
+#include <entry.h>
 
 namespace Ui {
 class MainWindow;
@@ -23,7 +23,7 @@ private:
 
 	QFileDialog fdialog;
 	CSVFile* csv;
-	QList<Row*> rows;
+	QList<Entry*> entries;
 
 	void showMessage(const QString& message);
 

@@ -1,6 +1,8 @@
 #ifndef ENTRY_H
 #define ENTRY_H
 
+#include <qlist.h>
+#include <qhash.h>
 #include <qstring.h>
 #include <matchnumber.h>
 
@@ -12,33 +14,38 @@ public:
 		int high;
 	};
 
-	Entry();
-	QString submitter();
-	MatchNumber match();
-	int teamNumber();
-	bool attended();
+	Entry(const QHash<QString, int>& index, const QList<QString>& row);
 
-	bool autoBaseline();
-	bool autoGear();
+	QString submitter() const;
+	MatchNumber match() const;
+	int teamNumber() const;
+	bool attended() const;
+
+	bool autoBaseline() const;
+	bool autoGear() const;
 
 	/**
 	 * @brief about how fast did they shoot balls during autonomous
 	 * @return 0 if they didn't shoot, otherwise a number in units of balls/sec
 	 */
-	int autoHighGoalSpeed();
-	Range autoHighGoalAccuracy();
-	QString autoComments();
+	int autoHighGoalSpeed() const;
+	Range autoHighGoalAccuracy() const;
+	QString autoComments() const;
 
-	int teleopGears();
-	bool teleopLoadingStation();
-	bool teleopGroundGear();
-	int teleopHighGoalSpeed();
-	Range teleopHighGoalAccuracy();
-	Range climbTime();
-	QString foulsDescription();
-	QString teleopComments();
+	int teleopGears() const;
+	bool teleopLoadingStation() const;
+	bool teleopGroundGear() const;
+	int teleopHighGoalSpeed() const;
+	Range teleopHighGoalAccuracy() const;
+	Range climbTime() const;
+	QString foulsDescription() const;
+	QString teleopComments() const;
 
 private:
+	static QString getColumn(const QString& name, const QHash<QString, int>& index, const QList<QString>& row);
+	static Range parseAccuracy(const QString& text);
+	static int parseSpeed(const QString& speed);
+
 	QString submitter_name;
 	MatchNumber match_number;
 	int team_number;
@@ -58,6 +65,7 @@ private:
 	Range climb_time;
 	QString fouls_description;
 	QString teleop_comments;
+
 };
 
 #endif // ENTRY_H

@@ -18,16 +18,22 @@ bool followedBy(char* str, int len, int index, char suf) {
  * @return the contents of the cell
  */
 QString grabCell(char* str, int start, int end) {
-	if (str[start] == '"' && str[end - 1] == '"') {
+	bool quoted = str[start] == '"' && str[end - 1] == '"';
+	if (quoted) {
 		++start;
 		--end;
-
-		// replace any double quotes with single quotes
-		QByteArray copy(str + start, end - start);
-		copy.replace("\"\"", "\"");
-		return QString(copy);
 	}
-	return QString(QByteArray(str + start, end - start));
+
+	QByteArray copy(str + start, end - start);
+
+	if (copy.endsWith('\r')) {
+		copy.chop(1);
+	}
+	if (quoted) {
+		copy.replace("\"\"", "\"");
+	}
+
+	return QString(copy);
 }
 
 bool CSVFile::readRow(QList<QString>& cells) {
@@ -75,6 +81,7 @@ bool CSVFile::readRow(QList<QString>& cells) {
 				}
 				break;
 			case '\r':
+				break;
 			case '\n':
 				if (!quoted || quote_preceded) {
 					cells.append(grabCell(buffer, cell_start, i));

@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+CONFIG += c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,14 +17,12 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     entry.cpp \
     matchnumber.cpp \
-    row.cpp \
     csvfile.cpp \
     parseexception.cpp
 
 HEADERS  += mainwindow.h \
     entry.h \
     matchnumber.h \
-    row.h \
     csvfile.h \
     parseexception.h
 
