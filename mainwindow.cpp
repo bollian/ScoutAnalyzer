@@ -11,16 +11,24 @@ using namespace std;
 MainWindow::MainWindow(QWidget* parent) :
     QMainWindow(parent),
 	ui(new Ui::MainWindow),
+	message_view(this),
 	fdialog(),
 	csv(NULL),
-	entries() {
+	data_store(),
+	team_list_data_model(data_store, this->font()),
+	team_list_view(&team_list_data_model) {
 	ui->setupUi(this);
+	ui->verticalLayout->addWidget(&message_view);
+	showMessage("Please select a spreadsheet.");
+
+	team_list_view.hide();
+	ui->verticalLayout->addWidget(&team_list_view);
 
 	fdialog.setFilter(QDir::AllDirs | QDir::Files | QDir::NoDot | QDir::NoDotDot);
 	fdialog.setNameFilter("Spreadsheet (*.csv)");
 
 	connect(&fdialog, &QFileDialog::finished, this, &MainWindow::fileSelected);
-	connect(ui->open_file_button, &QPushButton::pressed, this, &MainWindow::openFilePressed);
+	connect(&message_view, &MessageView::clicked, this, &MainWindow::openFilePressed);
 }
 
 MainWindow::~MainWindow() {
@@ -28,9 +36,6 @@ MainWindow::~MainWindow() {
 	if (csv != NULL) {
 		csv->close();
 		delete csv;
-	}
-	for (int i = 0; i < entries.length(); ++i) {
-		delete entries[i];
 	}
 }
 
@@ -61,8 +66,11 @@ void MainWindow::fileSelected(int status) {
 				while (more) {
 					row.clear();
 					more = csv->readRow(row);
-					entries.append(new Entry(header_index, row));
+					data_store.addEntry(new Entry(header_index, row));
 				}
+
+				message_view.hide();
+				team_list_view.show();
 			} catch (ParseException& e) {
 				showMessage("There was an issue with the CSV file (" + e.message() + "): " + e.context());
 			} catch (exception& e) {
@@ -77,9 +85,14 @@ void MainWindow::fileSelected(int status) {
 }
 
 void MainWindow::showMessage(const QString& message) {
-	ui->message_label->setText(message);
+	message_view.setMessage(message);
+	message_view.show();
 }
 
 void MainWindow::openFilePressed() {
 	fdialog.show();
+}
+
+void MainWindow::sortingChanged(EntryDataStore::SortOrder new_order) {
+	data_store.setSortOrder(new_order);
 }

@@ -18,12 +18,22 @@ SOURCES += main.cpp\
     entry.cpp \
     matchnumber.cpp \
     csvfile.cpp \
-    parseexception.cpp
+    parseexception.cpp \
+    messageview.cpp \
+    teamlistview.cpp \
+    teamlistdatamodel.cpp \
+    entrydatastore.cpp
 
 HEADERS  += mainwindow.h \
     entry.h \
     matchnumber.h \
     csvfile.h \
-    parseexception.h
+    parseexception.h \
+    messageview.h \
+    teamlistview.h \
+    teamlistdatamodel.h \
+    entrydatastore.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    messageview.ui \
+    teamlistview.ui
